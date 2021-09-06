@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -182,3 +183,13 @@ Route::fallback(function () {
 
 // Controller define in route
 Route::get('test', [TestController::class, 'index']);
+
+
+
+
+// -----------------------------------------------------------------------------
+
+// Route::resource('/category', CategoryController::class)->only(['index', 'create']);
+// Route::resource('/category', CategoryController::class)->except(['destroy']);
+
+Route::resource('/category', CategoryController::class);
