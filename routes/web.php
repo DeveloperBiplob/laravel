@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -178,3 +179,6 @@ Route::fallback(function () {
 });
 
 */
+
+// Controller define in route
+Route::get('test', [TestController::class, 'index']);
