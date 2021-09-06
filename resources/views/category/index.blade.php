@@ -2,6 +2,11 @@
 @section('title', 'Category')
 @section('master-content')
     <div class="card">
+
+        {{-- @if(session()->has('success'))
+            {{ session()->get('success') }}
+        @endif --}}
+        
         <div class="card-header">
             <h3 class="text-info float-left">Manage Categroy</h3>
             <a href="{{ route('category.create') }}" class="btn btn-primary btn-sm float-right">Add Category</a>

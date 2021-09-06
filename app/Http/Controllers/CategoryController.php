@@ -53,6 +53,9 @@ class CategoryController extends Controller
         ]);
 
         if($result){
+            // session()->flash('success', 'Data Save Successfully!');
+            $this->setNotificationMessage('Data Save Successfully!', 'success');
+
             return redirect()->route('category.index');
         }else{
             return back();
