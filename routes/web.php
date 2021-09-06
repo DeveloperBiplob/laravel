@@ -169,9 +169,12 @@ Route::get('/posts/{post:slug}', function (User $user) {
 
 */
 
+/*
 
 // Fallback Routes 
 Route::fallback(function () {
     return '404';
     // return view('errors.404');
 });
+
+*/
