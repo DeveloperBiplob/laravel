@@ -12,4 +12,17 @@ class Category extends Model
     protected $fillable = ['name', 'slug', 'image'];
     // protected $guarded = [];
 
+    // Defining A Mutator
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+
+    // Defining An Accessor
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+
 }
