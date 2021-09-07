@@ -31,7 +31,7 @@ class CategoryRequest extends FormRequest
         }else{
             return [
                 'name' => "required|unique:categories,name,{$this->category->id}",
-                'image' => "image|max:3072|mimes:jpeg,png,jpg",
+                // 'image' => "image|max:3072|mimes:jpeg,png,jpg",
             ];
         }
     }

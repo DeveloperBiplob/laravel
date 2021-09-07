@@ -86,7 +86,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view()->exists('category.show') ? view('category.show', compact('category')) : abort(404);
     }
 
     /**
@@ -97,7 +97,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view()->exists('category.edit') ? view('category.edit', compact('category')) : abort(404);
     }
 
     /**
@@ -107,10 +107,40 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $oldImgPath = $category->image;
+        
+        if($request->file('image')){
+
+            $file = $request->file('image');
+            $fileName = time() . '_' . uniqid() . '.' . $file->extension();
+            storage::putFileAs("public/image/category", $file, $fileName);
+            $path = "storage/image/category/" . $fileName;
+            
+            
+            
+            $data = [
+                'name'=> $request->name,
+                'slug'=> $request->name,
+                'image'=> $path,
+            ];
+            $category->update($data);
+
+            if(file_exists($oldImgPath)){
+                unlink($oldImgPath);
+            }
+        }else{
+            $category->update([
+                'name'=> $request->name,
+                'slug'=> $request->name
+
+            ]);
+        }
+        $this->setNotificationMessage('Data Update Successfully!', 'success');
+        return redirect()->route('category.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -120,6 +150,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if(file_exists($category->image)){
+            unlink($category->image);
+        }
+        $category->delete();
+        $this->setNotificationMessage('Data Delete Successfully!', 'danger');
+        return back();
     }
 }

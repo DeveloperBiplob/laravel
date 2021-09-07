@@ -30,9 +30,13 @@
                     <td>{{ $category->name }}</td>
                     <td><img width="150px" src="{{ $category->image }}" alt=""></td>
                     <td>
-                        <a href="" class="btn btn-success btn-xs">Edit</a>
-                        <a href="" class="btn btn-info btn-xs">Show</a>
-                        <a href="" class="btn btn-danger btn-xs">Delete</a>
+                        <a href="{{ route('category.edit', $category->id) }}" class="btn btn-success btn-xs">Edit</a>
+                        <a href="{{ route('category.show', $category->id) }}" class="btn btn-info btn-xs">Show</a>
+                        <form class="d-inline-block" action="{{ route('category.destroy', $category->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick=" return confirm('Are you Sure Delete This Data?')" class="btn btn-danger btn-xs">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
