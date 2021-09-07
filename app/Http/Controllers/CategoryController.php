@@ -18,7 +18,10 @@ class CategoryController extends Controller
     {
         // return $categories = Category::all();
         // return $categories = Category::latest()->get(); // latest use korle new insurt data gulo age pabo.
-        $categories = Category::latest()->get(['id', 'name', 'slug']);
+        // $categories = Category::latest()->get(['id', 'name', 'slug']);
+
+        // ---- Paginate -----//
+        $categories = Category::latest()->paginate(5);
 
         return view()->exists('category.index') ? view('category.index', compact('categories')) : abort(404);
     }
