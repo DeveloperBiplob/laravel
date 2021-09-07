@@ -28,7 +28,7 @@
                 <tr>
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
-                    <td><img src="" alt=""></td>
+                    <td><img width="150px" src="{{ $category->image }}" alt=""></td>
                     <td>
                         <a href="" class="btn btn-success btn-xs">Edit</a>
                         <a href="" class="btn btn-info btn-xs">Show</a>
