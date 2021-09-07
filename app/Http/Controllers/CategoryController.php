@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -38,8 +39,14 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
+        // $request->validate([
+        //     'name' => ['required', 'string', 'unique:categories,name'],
+        //     'image' => ['required', 'mimes:jpg,png']
+        // ]);
+
+
         /*
         $category = new Category();
         $category->name = $request->name;

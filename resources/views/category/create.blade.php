@@ -13,10 +13,16 @@
                     <label for="">Name</label>
                     <input type="text" name="name" id="" class="form-control" placeholder="Enter a Category Name">
                 </div>
+                @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
                 <div class="form-group">
                     <label for="">Image</label>
                     <input type="file" name="image" id="" class="form-control" >
                 </div>
+                @error('image')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
                 <div class="form-group">
                     <button class="btn btn-success btn-block">Add Category</button>
                 </div>
