@@ -193,3 +193,8 @@ Route::get('test', [TestController::class, 'index']);
 // Route::resource('/category', CategoryController::class)->except(['destroy']);
 
 Route::resource('/category', CategoryController::class);
+
+use App\Models\Product;
+Route::get('test/factory', function () {
+    return Product::get();
+});
