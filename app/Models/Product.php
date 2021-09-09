@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\ViewScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,17 @@ class Product extends Model
     // protected $attributes = [
     //     'price' => 100,
     // ];
+
+
+    //----- scopes define -------//
+
+    public static function booted()
+    {
+        // Global scope clas use kore
+        static::addGlobalScope(new ViewScope);
+
+
+    }
 
 
 

@@ -198,3 +198,8 @@ use App\Models\Product;
 Route::get('test/factory', function () {
     return Product::get();
 });
+
+// scopes route define test perpose
+Route::get('/scope', function () {
+    return Product::get()->count();
+});
