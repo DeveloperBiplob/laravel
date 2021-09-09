@@ -116,3 +116,22 @@ App\Models\Product::create([
 'description' => "this is porduct description"
 ]);
 App\Models\Product::get();
+clear
+App\Models\Product::create([
+	'title'=> 'This is title',
+  	'slug'=> 'This is slug',
+  	'quentity'=> 100,
+  	'status' => 1,
+  	'price' => 50,
+  	'view'=> 541,
+  	'description' => 'This is our porduct description'
+]);
+App\Models\Product::create([
+	'title'=> 'This is title',
+  	'slug'=> 'This is slug',
+  	'quantity'=> 100,
+  	'status' => 1,
+  	'price' => 50,
+  	'view'=> 541,
+  	'description' => 'This is our porduct description'
+]);
