@@ -54,4 +54,18 @@ class Product extends Model
 
 
 
+    //----- Define Dynamic Scopes -------//
+    public function scopeLowesPrice($query, $price)
+    {
+        return $query->where('price', '<', $price);
+    }
+
+
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', '=', $status);
+    }
+
+
+
 }

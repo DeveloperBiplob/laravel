@@ -222,4 +222,14 @@ Route::get('/scope', function () {
     // return Product::LowesAmount()->orWhere->HightAmount()->get()->count(); // 
 
 
+    // Utilizing Dynamic Scopes--------------//
+    // return Product::lowesPrice(40)->get()->count();
+    // return Product::Status(1)->get()->count();
+
+
+
+
+
+
+
 });
