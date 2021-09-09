@@ -212,5 +212,14 @@ Route::get('/scope', function () {
     
     // Removing Global Scopes Use Static function -------//
     // jokhon amader model er shob data dorkar probe tokhon ai "withoutGlobalScope" Method ta use korbo.
-    return Product::withoutGlobalScope('lessThenFifty')->get()->count(); // scope jodi onek gulo thake tile Array er modde scope er name gulo pass kore dibo.
+    // return Product::withoutGlobalScope('lessThenFifty')->get()->count(); // scope jodi onek gulo thake tile Array er modde scope er name gulo pass kore dibo.
+
+
+    // Utilizing A Local Scope------------//
+    // return Product::LowesAmount()->get()->count();
+    // return Product::HightAmount()->get()->count();
+    // return Product::HightAmount()->LowesAmount()->get()->count(); // Mehod Chaining o korte pari. onek gulo scope ak sate use korte pari.
+    // return Product::LowesAmount()->orWhere->HightAmount()->get()->count(); // 
+
+
 });

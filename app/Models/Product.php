@@ -28,17 +28,29 @@ class Product extends Model
 
     //----- scopes define -------//
 
-    public static function booted()
-    {
-        // Global scope clas use kore
-        // static::addGlobalScope(new ViewScope);
+    // public static function booted()
+    // {
+    //     // Global scope clas use kore
+    //     // static::addGlobalScope(new ViewScope);
 
-        // Normaliy Function use kore
-        static::addGlobalScope('lessThenFifty', function (Builder $builder) {
-            $builder->where('view', '>', 50);
-        });
+    //     // Normaliy Function use kore
+    //     // static::addGlobalScope('lessThenFifty', function (Builder $builder) {
+    //     //     $builder->where('view', '>', 50);
+    //     // });
+    // }
+
+
+
+    //----- Define Local scopes -------//
+    public function scopeLowesAmount($query) // Ekhane scope ta constant thakbe baki ta condition er upor base kore isse moto add korbo.['scope'LowesAmount]
+    {
+        return $query->where('price', '<', 40);
     }
 
+    public function scopeHightAmount($query) // Ekhane scope ta constant thakbe baki ta condition er upor base kore isse moto add korbo.['scope'HeightAmount]
+    {
+        return $query->where('price', '>', 40);
+    }
 
 
 
