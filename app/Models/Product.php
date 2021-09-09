@@ -6,6 +6,7 @@ use App\Scopes\ViewScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
@@ -30,9 +31,12 @@ class Product extends Model
     public static function booted()
     {
         // Global scope clas use kore
-        static::addGlobalScope(new ViewScope);
+        // static::addGlobalScope(new ViewScope);
 
-
+        // Normaliy Function use kore
+        static::addGlobalScope('lessThenFifty', function (Builder $builder) {
+            $builder->where('view', '>', 50);
+        });
     }
 
 
