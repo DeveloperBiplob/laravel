@@ -1,0 +1,118 @@
+App\Models\Product::create([
+title => 'product title',
+'slug' => 'porduct-title,
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);?>
+App\Models\Product::create([
+title => 'product title',
+'slug' => 'porduct-title,
+'quantity' => "100",
+'status' => 1,
+'price' => 500',
+'view' => '1000',
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+title => 'product title',
+'slug' => 'porduct-title,
+'quantity' => "100",
+'status' => 1,
+'price' => 500',
+'view' => '1000',
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+title => 'product title',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+'title' => 'product title',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+'title' => 'product title',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+'title' => 'product title',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+'title' => 'product title',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+'title' => 'product title',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+'title' => 'product title',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::update([
+'title' => 'product',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::update([
+'title' => 'product',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::create([
+'title' => 'product',
+'slug' => 'porduct-title',
+'quantity' => 100,
+'status' => 1,
+'price' => 500,
+'view' => 1000,
+'description' => "this is porduct description"
+]);
+App\Models\Product::get();
