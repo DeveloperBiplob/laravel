@@ -195,11 +195,22 @@ Route::get('test', [TestController::class, 'index']);
 Route::resource('/category', CategoryController::class);
 
 use App\Models\Product;
+use App\Scopes\ViewScope;
+
 Route::get('test/factory', function () {
     return Product::get();
 });
 
 // scopes route define test perpose
 Route::get('/scope', function () {
-    return Product::get()->count();
+    // return Product::get()->count();
+
+    // Removing Global Scopes Use class -------//
+    // jokhon amader model er shob data dorkar probe tokhon ai "withoutGlobalScope" Method ta use korbo.
+    // return Product::withoutGlobalScope(ViewScope::class)->get()->count(); // scope jodi onek gulo thake tile Array er modde scope er name gulo pass kore dibo.
+
+    
+    // Removing Global Scopes Use Static function -------//
+    // jokhon amader model er shob data dorkar probe tokhon ai "withoutGlobalScope" Method ta use korbo.
+    return Product::withoutGlobalScope('lessThenFifty')->get()->count(); // scope jodi onek gulo thake tile Array er modde scope er name gulo pass kore dibo.
 });
