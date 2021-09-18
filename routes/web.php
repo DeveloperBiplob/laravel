@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -182,7 +183,7 @@ Route::fallback(function () {
 */
 
 // Controller define in route
-Route::get('test', [TestController::class, 'index']);
+// Route::get('test', [TestController::class, 'index']);
 
 
 
@@ -192,14 +193,15 @@ Route::get('test', [TestController::class, 'index']);
 // Route::resource('/category', CategoryController::class)->only(['index', 'create']);
 // Route::resource('/category', CategoryController::class)->except(['destroy']);
 
-Route::resource('/category', CategoryController::class);
+// Route::resource('/category', CategoryController::class);
 
-use App\Models\Product;
-use App\Scopes\ViewScope;
+// use App\Models\Product;
+// use App\Models\User;
+// use App\Scopes\ViewScope;
 
-Route::get('test/factory', function () {
-    return Product::get();
-});
+// Route::get('test/factory', function () {
+//     return Product::get();
+// });
 
 // scopes route define test perpose
 Route::get('/scope', function () {
@@ -227,9 +229,78 @@ Route::get('/scope', function () {
     // return Product::Status(1)->get()->count();
 
 
-
-
-
-
-
 });
+
+    // Relationships----------------//
+
+    Route::get('one-to-one', function () {
+
+        # with()
+        # without()
+        # withOnly()
+        # has()
+        # whereHas()
+            # whereNotNull()
+            # whereNull()
+            # where() Custom Condition er jonno
+        # doesntHave()
+        # whereDoesntHave() // Custom Condition er jonno 
+
+
+        // Eger load --------//
+        // Multiple value hole array r bole dibo.
+        // $users = User::with('profile')->get(); 
+
+        // Without Egger Load----------//
+        // Jeta jeta Egger load kora lagben nae bole dibo.
+        // $users = User::without('profile', 'category')->get();
+
+        // With Only Egger Load----------//
+        // Shudu jeta lage seta bole dibo.
+        // $users = User::withOnly('profile')->get();
+
+        // has ----------//
+        // jader profile data ache shudu tader user gulo show kore.
+        // $users = User::with('profile')->has('profile')->get();
+
+        // WhereHas ----------//
+        // Custom Condition use kora jay.
+        // jader profile data ache shudu tader user gulo show kore.
+
+        // $users = User::with('profile')->whereHas('profile', function($query){
+        //     $query->whereNotNull('post_code'); // whereNotNull
+        // })->get();
+
+        // $users = User::with('profile')->whereHas('profile', function($query){
+        //     $query->whereNull('post_code'); // whereNull
+        // })->get();
+
+        // $users = User::with('profile')->whereHas('profile', function($query){
+        //     // $query->where('view', '<', 50); 
+        //     $query->whereEmail('biplob@mail.com'); // Model er property nonusare use kor jay
+        // })->get();
+
+
+        // Profile er data na pele jate error na ase. se jonno bladeTemplate e ata use korbo - {{ optional($user->profile)->view }} or {{ $user->profile->view ?? '' }}
+        // Model o bole dite pari. je khane relationship ta define korbo. - return $this->hasOne(profile::class, 'user_id', 'id')->withDefault(); 
+
+        // jader profile nei tader gulo show korbe.
+        // $users = User::with('profile')->doesntHave('profile')->get(); 
+
+        // whereDoesntHave() Condition use kore
+        // $users = User::with('profile')->whereDoesntHave('profile', function($query){
+        //     $query->where('name', 'like', '%biplob%');
+        // })->get();
+        
+        // Method 'profile()' use korle query bilder er instant dei, ja diye data create kora jay.
+        // $users = User::find(2)->profile()->create([
+        //     'phone' => 8218728,
+        //     'address' => 'india',
+        //     'view' => 400,
+        //     'post_code' => '505'
+        // ]); 
+
+
+        $users = User::with('profile')->get(); 
+        return view('relationship.index', compact('users'));
+    });
