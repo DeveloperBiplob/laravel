@@ -72,4 +72,12 @@ class User extends Authenticatable
     // Chaile " withOnly() " use korte pari. jeta lagbe shudu seta bole dibo.
 
     protected $with = ['profile'];
+
+
+    // One to Many relationship / Has Many Relationship---------//
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
 }

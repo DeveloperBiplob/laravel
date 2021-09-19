@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -193,7 +194,7 @@ Route::fallback(function () {
 // Route::resource('/category', CategoryController::class)->only(['index', 'create']);
 // Route::resource('/category', CategoryController::class)->except(['destroy']);
 
-// Route::resource('/category', CategoryController::class);
+Route::resource('/category', CategoryController::class);
 
 // use App\Models\Product;
 // use App\Models\User;
@@ -301,6 +302,26 @@ Route::get('/scope', function () {
         // ]); 
 
 
-        $users = User::with('profile')->get(); 
-        return view('relationship.index', compact('users'));
+        // $users = User::with('profile')->get(); 
+        // return view('relationship.index', compact('users'));
+    });
+
+
+    // HasMany Relationship or One to Many
+
+    Route::get('one-to-many', function () {
+
+        // Eeager Loading
+        // return $users = User::with('posts')->get();
+
+        // lazy loading
+        // $users = User::get();
+        // return $users->load('posts');
+
+        // $users = User::whereHas('posts')->get();
+        // $users = User::whereDoesntHave('posts')->get();
+
+        $users = User::get();
+        $users->load('posts');
+        return view('relationship.hasMany', compact('users'));
     });

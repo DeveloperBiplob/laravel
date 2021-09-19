@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         // Seeder call--------//
         $this->call([
             UserSeeder::class,
-            ProfileSeeder::class
+            ProfileSeeder::class,
+            PostSeeder::class
         ]);
 
 
