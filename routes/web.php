@@ -321,7 +321,17 @@ Route::get('/scope', function () {
         // $users = User::whereHas('posts')->get();
         // $users = User::whereDoesntHave('posts')->get();
 
-        $users = User::get();
-        $users->load('posts');
-        return view('relationship.hasMany', compact('users'));
+        
+        // BelongsTo------//
+        // Invers Relation use kore data get. post er user ke seta find korche.
+
+        // return $post = Post::find(10)->user;
+        // return $post = Post::find(10)->user->email;
+
+        // Relationship use kore data insurt---------//
+        // $user = User::find(5)->posts()->create([
+        //     'title' => 'Laravel',
+        //     'view' => 100
+        // ]);
+
     });
