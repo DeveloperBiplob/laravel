@@ -321,7 +321,7 @@ Route::get('/scope', function () {
         // $users = User::whereHas('posts')->get();
         // $users = User::whereDoesntHave('posts')->get();
 
-        
+
         // BelongsTo------//
         // Invers Relation use kore data get. post er user ke seta find korche.
 
@@ -333,5 +333,18 @@ Route::get('/scope', function () {
         //     'title' => 'Laravel',
         //     'view' => 100
         // ]);
+
+       
+        // latestOfMany 
+        // return User::find(5)->latestPost;
+
+        // oldestOfMany
+        // return User::find(5)->oldestPost;
+
+        // OfMany
+        // return User::find(5)->lowPostView;
+
+        
+
 
     });

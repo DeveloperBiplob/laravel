@@ -80,4 +80,41 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class, 'user_id', 'id');
     }
+
+
+    // Latest Of many----------//
+    // kono akta user er under e shorbo ses jei post ta create hoiche seta return kore. latest post ta return kore
+    // By default ai method ta crated_at and updated_at er upor base kore data dey.
+
+    public function latestPost()
+    {
+        return $this->hasOne(Post::class)->latestOfMany();
+    }
+
+
+    // Oldest Of Many---------//
+    // kono akta user er under e sobar prothom jei post ta create hoiche seta return kore. oldes post return kore.
+    // By default ai method ta crated_at and updated_at er upor base kore data dey.
+    public function oldestPost()
+    {
+        return $this->hasOne(Post::class)->oldestOfMany();
+    }
+
+
+    // OfMany------------------//
+    // Column er upor condition kore data tule ane.
+    // Isse moto condition use korte pare jeta amar dorkar porbe.
+    // Like ekhane ami shob theke besi jei view ta ache sei ta show korchi.
+    public function largePostView()
+    {
+        return $this->hasOne(Post::class)->ofMany('view', 'max');
+    }
+
+    // Like ekhane ami shob theke kom jei view ta ache sei ta show korchi
+    public function lowPostView()
+    {
+        return $this->hasOne(Post::class)->ofMany('view', 'min');
+    }
+
+
 }
