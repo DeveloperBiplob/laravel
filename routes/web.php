@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestController;
+use App\Models\Machanic;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -347,4 +348,13 @@ Route::get('/scope', function () {
         
 
 
+    });
+
+
+    // Has one Through ---//
+
+    Route::get('has-one-through', function () {
+        // $machanics = Machanic::with('car.owner')->get(); // car class er under e owner akta method ti '.' use kore eager load kortechi.
+        $machanics = Machanic::with('car', 'owner')->get();
+        return view('relationship.has-one-through', compact('machanics'));
     });

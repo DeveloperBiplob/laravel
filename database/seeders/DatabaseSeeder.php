@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Car;
+use App\Models\Machanic;
+use App\Models\Owner;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,9 +25,9 @@ class DatabaseSeeder extends Seeder
 
         // Seeder call--------//
         $this->call([
-            UserSeeder::class,
-            ProfileSeeder::class,
-            PostSeeder::class
+            // UserSeeder::class,
+            // ProfileSeeder::class,
+            // PostSeeder::class
         ]);
 
 
@@ -36,6 +40,44 @@ class DatabaseSeeder extends Seeder
         //     ProductSeeder::class
         // ]);
 
+        // $mac = ['Biplob', 'Jabery', 'Bipu', 'Imran'];
+        // for($i = 0; $i <= $mac; $i ++){
+        //     Machanic::create([
+        //         'name' => $mac[$i]
+        //     ]);
+        // }
+
+        // $cars = ['BMW', 'MARCHETIG', 'YAHAMAHA', 'NNN'];
+        // for($i = 0; $i <= $cars; $i ++){
+        //     Car::create([
+        //         'machanic_id' => $i,
+        //         'name' => $cars[$i]
+        //     ]);
+        // }
+
+        // $own = ['korim', 'rakib', 'sobuj', 'manik'];
+        // for($i = 0; $i <= $own; $i ++){
+        //     Owner::create([
+        //         'car_id' => $i,
+        //         'name' => $own[$i]
+        //     ]);
+        // }
+
+        for($i = 1; $i <=10; $i++){
+            Machanic::create([
+            'name' => Str::random(3)
+            ]);
+
+            Car::create([
+            'name' => Str::random(3),
+            'machanic_id' => $i
+            ]);
+
+            Owner::create([
+            'name' => Str::random(3),
+            'car_id' => $i
+            ]);
+        }
 
     }
 }
