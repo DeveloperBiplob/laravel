@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Machanic;
 use App\Models\Owner;
 use App\Models\Shop;
+use App\Models\Skill;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
         // Seeder call--------//
         $this->call([
-            // UserSeeder::class,
+            UserSeeder::class,
             // ProfileSeeder::class,
             // PostSeeder::class
         ]);
@@ -88,27 +89,35 @@ class DatabaseSeeder extends Seeder
 
         // Has-many-throuhg//
 
-        $countries = ['Bangladesh', 'India', 'Pakisthan', 'Nepal', 'Austilia'];
-        $cities = ['Dhaka', 'Comilla', 'Ragshahi', 'Selete', 'Noakhali'];
-        $shops = ['Shopno', 'Modina', 'Evele', 'Daraz', 'EFood'];
+        // $countries = ['Bangladesh', 'India', 'Pakisthan', 'Nepal', 'Austilia'];
+        // $cities = ['Dhaka', 'Comilla', 'Ragshahi', 'Selete', 'Noakhali'];
+        // $shops = ['Shopno', 'Modina', 'Evele', 'Daraz', 'EFood'];
 
-        for($i = 0; $i < count($countries); $i++){
-            Country::create([
-                'name' => $countries[$i],
-            ]);
-        }
+        // for($i = 0; $i < count($countries); $i++){
+        //     Country::create([
+        //         'name' => $countries[$i],
+        //     ]);
+        // }
 
-        for($i = 0; $i < count($countries); $i++){
-            City::create([
-                'country_id' => rand(1, 5),
-                'name' => $cities[$i],
-            ]);
-        }
+        // for($i = 0; $i < count($countries); $i++){
+        //     City::create([
+        //         'country_id' => rand(1, 5),
+        //         'name' => $cities[$i],
+        //     ]);
+        // }
 
-        for($i = 0; $i < count($countries); $i++){
-            Shop::create([
-                'city_id' => rand(1, 5),
-                'name' => $shops[$i],
+        // for($i = 0; $i < count($countries); $i++){
+        //     Shop::create([
+        //         'city_id' => rand(1, 5),
+        //         'name' => $shops[$i],
+        //     ]);
+        // }
+
+
+        $skills = ['PHP', 'LARAVEL', 'JAVASCRIPT', 'JQUERY', 'PHYTHON', 'RUBIS'];
+        for($i = 0; $i < count($skills); $i++){
+            Skill::create([
+                'name' => $skills[$i],
             ]);
         }
 

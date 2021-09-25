@@ -117,4 +117,32 @@ class User extends Authenticatable
     }
 
 
+    // Many to mamy Relationship / BelongToMany------//-----------------//-----------------//
+
+    public function skills()
+    {
+        // return $this->belongsToMany(Skill::class, 'skill_user');
+
+        // Time stramp add korte chaile.
+
+        // return $this->belongsToMany(Skill::class, 'skill_user')->withTimestamps(); 
+
+
+
+        // Pivot table e data Insert IN Extra column.
+        // withPivot('columnName') // column name ta bole dite hobe. karon pivot table ForeginId chara onno kono fild e track kore na.
+        // Multiple Column hole array diye dibo. withPivot(['view', 'status'])
+
+        // return $this->belongsToMany(Skill::class, 'skill_user')->withTimestamps()->withPivot('view'); 
+
+
+
+        // Pivot Table er key customize-------//
+        // Bydefault pivot table er data access korte chaile pivot likhle hoy.{{ $skill->pivot->view }}
+        // Customize kore as('my_pivot') modde jei key ta dibo, access korar somoy oi diye access korte hobe.{{ $skill->my_pivot->view }}
+
+        return $this->belongsToMany(Skill::class, 'skill_user')->withTimestamps()->withPivot('view')->as('my_pivot'); 
+    }
+
+
 }

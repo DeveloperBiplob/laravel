@@ -5,6 +5,7 @@ use App\Http\Controllers\TestController;
 use App\Models\Country;
 use App\Models\Machanic;
 use App\Models\Post;
+use App\Models\Skill;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -368,4 +369,82 @@ Route::get('/scope', function () {
         // $countries = Country::with('cities.shops')->get();
         $countries = Country::with('cities', 'shops')->get();
         return view('relationship.has-many-through', compact('countries'));
+    });
+
+
+    // Many to Many / BelongToMany ------//
+
+    Route::get('many-to-many', function () {
+
+        // Attaching---//
+        // Pevot table e data insert kore.
+        // User er under e skills add kore.
+        // return $user = User::find(1)->skills()->attach(1);
+
+        // Pivot table e data inser in Extra Column---//
+        // Single Data Insert--
+        // return $user = User::find(1)->skills()->attach(2, ['view'=> 50]);
+
+        // Pivot table e data inser in Extra Column---//
+        // Multiple Data Insert--
+        // return $user = User::find(2)->skills()->attach(
+        //     [
+        //         3 => ['view' =>80],
+        //         4 => ['view' =>90],
+        //     ]
+        // );
+
+        // Detaching-----// Means Delete
+        // Delete Single
+        // return User::find(1)->skills()->detach(2);
+
+        // Delete Multiples
+        // return User::find(2)->skills()->detach([3,4]);
+
+        // Synching----//
+        // Atetime Insert And Delete kore.
+        // Array er modder jei value gulo dataBase e ache oi vaue gulo ke rahke.
+        // R jei value gulo dataBase e ache kinto array te nei sei gulo delete kore, r noton gulo Insert kore.
+        // return User::find(2)->skills()->sync([1,2,3,4]);
+
+        // Sync use koere Extra column e value Insert---
+        // return User::find(2)->skills()->sync(
+        //     [
+        //         1 => ['view' => 50],
+        //         2 => ['view' => 60],
+        //         3,
+        //         4 => ['view' => 80],
+        //     ]
+        // );
+
+
+        // Toggle ------//
+        // Array te jei gulo thakbe tader modde jei gulo database er sathe match korbe oi gulo delete kore. baki gulo Inset kore.
+        // return User::find(2)->skills()->toggle([1,2,3]);
+        // return User::find(2)->skills()->toggle([1,2,3,5]);
+
+
+        // Fatch Data -----//
+        // shob gulo user dische---
+        // $users = User::with('skills')->get();
+
+        // Jader Skills ache tader dische--
+        // $users = User::with('skills')->has('skills')->get();
+        
+        // Pivot table er data pawar jono, just view file pivot key word dile hobe. like - {{ $skill->pivot->view }} 
+        // R jodi key customize kore onno kocho dei ta hole oita diye access korte hobe. like - {{ $skill->my_pivot->view }} 
+
+
+
+
+        // Inverse relationship--------//
+        // Skills thek Users er data Facth----
+
+        $skills = Skill::with('users')->get();
+
+
+
+
+        // return view('relationship.many-to-many', compact('users'));
+        return view('relationship.many-to-many', compact('skills'));
     });
