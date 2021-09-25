@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestController;
+use App\Models\Country;
 use App\Models\Machanic;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -357,4 +358,14 @@ Route::get('/scope', function () {
         // $machanics = Machanic::with('car.owner')->get(); // car class er under e owner akta method ti '.' use kore eager load kortechi.
         $machanics = Machanic::with('car', 'owner')->get();
         return view('relationship.has-one-through', compact('machanics'));
+    });
+
+
+
+    // Has Many Through ---//
+
+    Route::get('has-many-through', function () {
+        // $countries = Country::with('cities.shops')->get();
+        $countries = Country::with('cities', 'shops')->get();
+        return view('relationship.has-many-through', compact('countries'));
     });

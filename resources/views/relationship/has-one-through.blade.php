@@ -9,7 +9,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>Sl</th>
-                        <th>Name</th>
+                        <th>Machanic</th>
                         <th>Car</th>
                         <th>Owner</th>
                     </tr>
