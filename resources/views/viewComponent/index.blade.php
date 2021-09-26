@@ -6,10 +6,16 @@
                 <h1>View Component</h1>
             </div>
             <div class="card-body">
-                <p>{{ $test }}</p>
+                {{-- <p>{{ $test }}</p>
                 @foreach($users as $user)
                     <p>{{ $user->name }}</p>
-                @endforeach
+                @endforeach --}}
+
+
+
+                <!--View Composer-------------->
+                <h3>Data Pass in View Composer</h3>
+                {{ $globalUsers }}
             </div>
         </div>
     </div>

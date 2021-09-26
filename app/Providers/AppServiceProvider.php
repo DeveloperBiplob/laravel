@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\View\Composers\ViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,5 +31,17 @@ class AppServiceProvider extends ServiceProvider
 
         // View::share('test', 'This is our Global Varible');
         // view()->share('test', 'This is our Global Varible');
+
+
+
+
+
+        // Create A Extra View Composer Class--------//
+
+        //**  Jei kono ServiceProvider e call kore dile e hoy. like - AppServiceProvider
+        //** Or amara jodi kono serviceProvider create kore thaki oita call korle o hobe.
+
+        // Ai Khane just class ta call kore dite hobe--
+        // View::composer('viewComponent.index', ViewComposer::class);
     }
 }

@@ -453,6 +453,13 @@ Route::get('/scope', function () {
 
 
     // View Share --------------------------------------//
+    // Route::get('view', function () {
+    //     return view('viewComponent.index');
+    // });
+
+
+
+    // View Compser --------------------------------------//
     Route::get('view', function () {
         return view('viewComponent.index');
     });
