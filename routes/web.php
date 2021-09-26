@@ -448,3 +448,11 @@ Route::get('/scope', function () {
         // return view('relationship.many-to-many', compact('users'));
         return view('relationship.many-to-many', compact('skills'));
     });
+
+
+
+
+    // View Share --------------------------------------//
+    Route::get('view', function () {
+        return view('viewComponent.index');
+    });
