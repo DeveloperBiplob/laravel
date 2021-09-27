@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\View\Components\Alert;
+use App\View\Components\NotificationComponenet;
 use App\View\Composers\ViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -61,6 +63,16 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('route', function ($value) {
             return "<?php echo route($value) ?>";
         });
+
+
+
+        // Component------------//
+        // Jodi component er akta Custom Name define korte chai, and sei name e component ke access korte chai. 
+        // Ta hole shudu ai kane Register korbo. noy toh kora lagne na. jus component er name dite access korbo.
+
+        // Akhon ai component ke access korte chaile <x-ComponentAlert/> ai vabe call korte hobe. 
+        Blade::component('ComponentAlert', Alert::class); 
+        Blade::component('Notification', NotificationComponenet::class); 
 
         
     }

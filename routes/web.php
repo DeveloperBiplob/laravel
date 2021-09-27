@@ -460,9 +460,9 @@ Route::get('/scope', function () {
 
 
     // View Compser --------------------------------------//
-    Route::get('view', function () {
-        return view('viewComponent.index');
-    });
+    // Route::get('view', function () {
+    //     return view('viewComponent.index');
+    // });
 
 
 
@@ -470,3 +470,8 @@ Route::get('/scope', function () {
     Route::get('route/{id}/{name}', function () {
         return "This value is come to Custom Blade Directive";
     })->name('customRoute');
+
+    Route::get('view', function () {
+        $users = User::get();
+        return view('viewComponent.index', compact('users'));
+    });

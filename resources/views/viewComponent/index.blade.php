@@ -29,6 +29,49 @@
 
 
 
+                <!--Components--->
+                {{-- <x-alert/> --}}
+
+                {{-- <x-alert> </x-alert> --}}
+                
+                <!--SubFolder e jodi file thake ta hole Folder name er pore akta "." dite component call korbo-->
+                {{-- <x-Form.Input></x-Form.Input> --}}
+
+
+                <!--Blade file theke chaile component e data pass korte pari
+                Then ata ke Component er jonno jei class file toiri hoy tar constructor e value ta dorte hobe.
+
+                Note---
+                Component er maddome jodi php kono Variable pass kore chai ta hole clone : symble ta use korte hobe.
+                Ai khaner cloner er sathe jei users, ata diye constructor e received korbo. r porer ta holo jei variable pass korchi oita.
+                -->
+                
+                <!--- Code Refactor by Composers------->
+                <x-Form.Input title="This Title is comming form Component" name="Biplob Jabery" :users="$users"/>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>1st</th>
+                        <th>2nd</th>
+                        <th>3rd</th>
+                    </tr>
+                    <tr>
+                        <td>.</td>
+                        <td>.</td>
+                        <td>.</td>
+                    </tr>
+                </table>
+
+                <!--- Custom name use kore component Call-------> 
+                <x-ComponentAlert/>
+
+                <x-Notification type="success"/>
+                <br>
+                <x-Notification type="danger"/>
+
+
+
+
+
             </div>
         </div>
     </div>
