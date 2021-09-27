@@ -463,3 +463,10 @@ Route::get('/scope', function () {
     Route::get('view', function () {
         return view('viewComponent.index');
     });
+
+
+
+    // Custom Blade Directive ----------//
+    Route::get('route/{id}/{name}', function () {
+        return "This value is come to Custom Blade Directive";
+    })->name('customRoute');
