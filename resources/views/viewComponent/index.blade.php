@@ -101,6 +101,20 @@
                     </x-slot>
 
                 </x-Test>
+
+
+                <!-- Anonymous components Call----------->
+                {{-- <x-anonymous_component/> --}}
+
+
+                <!--  Anonymous components Attributes pass------------->
+                {{-- <x-anonymous_component style="font-size:20px"></x-anonymous_component> --}}
+
+                <!--  Anonymous components  Props use kore data or  Attributes pass------------->
+                @php
+                    $message = "This is our Dynamic data form data base or others";
+                @endphp
+                <x-anonymous_component type="error" :message="$message" class="mb-4"/>
                
 
 
