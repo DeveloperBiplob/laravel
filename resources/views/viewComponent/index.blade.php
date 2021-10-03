@@ -68,6 +68,43 @@
                 <br>
                 <x-Notification type="danger"/>
 
+                <hr>
+
+
+
+
+
+                {{-- Slot---------
+                // Sloat Property use kore o component er blade file e data pass korte pari.
+                // Normaly amra kono Variabel Or data pass korar jonno Constructor use kortam.
+                // but slot use korte seta na kore sora sorasori Component er Blade file e data Received korte pari.
+                // Just <x-Test> Pass some data <x-Test/> ai vabe data ta pass kore dile e hoy.
+                // R seta Component er view file e $slot diye receive korte hoy. {{ $slot }}
+                // Finaly Componenet jekhan theke call kora hobe sekhane data ta show korbe.
+                 --}}
+                
+                <x-Test>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea soluta cupiditate ad quo veritatis dolorem ipsa ullam cumque! Provident repudiandae consectetur minima repellat, hic dignissimos sequi totam similique nemo fugit!
+
+
+                    {{-- 
+                    // Amara Chaile Slot e name use korte pari. jeta dore data pass korte pari.  <x-slot name="left_col">Defin Content </x-slot>
+                    // Then Name ta Component er jei khane call korbo data gulo oi khane push hoye jabe.
+                    // Nidristo kono kahne data ta push korar jonno Name Slot Use korbo.
+                    --}}
+
+                    <x-slot name="left_col">
+                        <h1>This is Left Slot</h1>
+                    </x-slot>
+                    <x-slot name="right_col">
+                        <h1>This is Right Slot</h1>
+                    </x-slot>
+
+                </x-Test>
+               
+
+
+
 
 
 
