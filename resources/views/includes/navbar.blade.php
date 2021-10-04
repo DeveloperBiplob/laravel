@@ -116,5 +116,15 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+
+      @auth('web')
+      <li class="nav-item">
+        <form action="{{ route('logout') }}" method="POST">
+          @csrf
+          <button class="btn btn-xs btn-danger my-2" onclick=" return confirm('Are you to logout this Dashboard!')">Logout</button>
+        </form>
+      </li>
+      @endauth
+
     </ul>
   </nav>

@@ -9,6 +9,8 @@ use App\Models\Skill;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -475,3 +477,93 @@ Route::get('/scope', function () {
         $users = User::get();
         return view('viewComponent.index', compact('users'));
     });
+
+
+
+
+    // Custom Authentication-----------------------------------//
+    // Middleware Guest use korle authenticate chara access korte parbe. and auhenticate thakle gest e access korte parbena.
+    // Middleware Auth use korle authneticate na thake access korte parbe na. and auhenticate na thakle Auth e access korte parbena.
+
+    Route::get('/login', function(){
+        return view('auth.login');
+    })->name('login')->middleware('guest');
+
+    Route::post('/login', function (Request $request) {
+
+        // $credentials = $request->validate([
+        //     'email' => ['required', 'email', 'exists:users,email'],
+        //     'password' => ['required'],
+        // ]);
+
+        // if($request->remember) {
+        //     $credentials['remember'] = true;
+        // }
+
+        // if (Auth::attempt($credentials, $request->remember)) {
+        //     $request->session()->regenerate();
+
+        //     return redirect()->intended('dashboard');
+        // }
+
+        // return back()->withErrors([
+        //     'email' => 'The provided credentials do not match our records.',
+        // ]);
+
+
+        $request->validate([
+            'email' => ['required', 'exists:users,email'],
+            'password' => ['required']
+        ]);
+
+        if(Auth::attempt($request->only('email', 'password'))){
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
+        }
+
+        return back()->withErrors([
+            'password' => 'The Password is Not Match',
+        ]);
+
+    })->name('login')->middleware('guest');
+
+
+    Route::get('/register', fn() => view('auth.register'))->name('register')->middleware('guest');
+
+    Route::post('/register', function (Request $request) {
+        // return $request->all();
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'unique:users'],
+            'password' => ['required'],
+            'con_password' => ['required'],
+        ]);
+
+        $password = $request->password;
+        $con_password = $request->con_password;
+
+        if($password === $con_password){
+            $user = User::create($request->only('name', 'email', 'password'));
+
+            $request->session()->regenerate();
+            Auth::guard('web')->login($user); // login method ta akta instance nei
+            return redirect()->intended('dashboard');
+
+        }else{
+            return back()->withErrors([
+                'con_password' => 'Password Miss Match',
+            ]);
+        
+        }
+
+    })->name('register')->middleware('guest');
+
+    Route::get('/dashboard', fn() => view('auth.dashboard'))->name('dashboard')->middleware('auth');
+
+    Route::post('/logout', function (Request $request) {
+
+        Auth::guard('web')->logout();
+        return redirect()->intended('login');
+
+    })->name('logout');
