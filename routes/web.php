@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -517,6 +519,7 @@ Route::get('/scope', function () {
         ]);
 
         if(Auth::attempt($request->only('email', 'password'))){
+
             $request->session()->regenerate();
 
             return redirect()->intended('dashboard');
@@ -546,6 +549,9 @@ Route::get('/scope', function () {
         if($password === $con_password){
             $user = User::create($request->only('name', 'email', 'password'));
 
+            // Email veyficarion er jono ai Event ta call korte hobe.
+            event(new Registered($user));
+
             $request->session()->regenerate();
             Auth::guard('web')->login($user); // login method ta akta instance nei
             return redirect()->intended('dashboard');
@@ -559,11 +565,29 @@ Route::get('/scope', function () {
 
     })->name('register')->middleware('guest');
 
-    Route::get('/dashboard', fn() => view('auth.dashboard'))->name('dashboard')->middleware('auth');
+    Route::get('/dashboard', fn() => view('auth.dashboard'))->name('dashboard')->middleware(['auth', 'verified']);
 
     Route::post('/logout', function (Request $request) {
 
         Auth::guard('web')->logout();
+        // Ata logout er jonno use kore hobe. vule dewa hoyni.
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->intended('login');
+    
 
     })->name('logout');
+
+
+    // Email Verification---------//
+
+    Route::get('/email/verify', function () {
+        return view('auth.verify-email');
+    })->middleware('auth')->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+    
+        return redirect('/dashboard');
+    })->middleware(['auth', 'signed'])->name('verification.verify');
