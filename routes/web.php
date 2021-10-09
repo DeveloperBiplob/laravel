@@ -493,7 +493,7 @@ Route::get('/scope', function () {
 
     Route::get('/login', function(){
         return view('auth.login');
-    })->name('login')->middleware('guest');
+    })->name('login')->middleware('guest:web');
 
     Route::post('/login', function (Request $request) {
 
@@ -536,7 +536,7 @@ Route::get('/scope', function () {
     })->name('login')->middleware('guest');
 
 
-    Route::get('/register', fn() => view('auth.register'))->name('register')->middleware('guest');
+    Route::get('/register', fn() => view('auth.register'))->name('register')->middleware('guest:web');
 
     Route::post('/register', function (Request $request) {
         // return $request->all();
@@ -569,7 +569,7 @@ Route::get('/scope', function () {
 
     })->name('register')->middleware('guest');
 
-    Route::get('/dashboard', fn() => view('auth.dashboard'))->name('dashboard')->middleware(['auth', 'verified']);
+    Route::get('/dashboard', fn() => view('auth.dashboard'))->name('dashboard')->middleware(['auth:web', 'verified']);
 
     Route::post('/logout', function (Request $request) {
 

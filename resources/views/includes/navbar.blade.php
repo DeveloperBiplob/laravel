@@ -126,5 +126,14 @@
       </li>
       @endauth
 
+      @auth('admin')
+      <li class="nav-item">
+        <form action="{{ route('admin.logout') }}" method="POST">
+          @csrf
+          <button class="btn btn-xs btn-danger my-2" onclick=" return confirm('Are you to logout this Admin Dashboard!')">Logout</button>
+        </form>
+      </li>
+      @endauth
+
     </ul>
   </nav>
