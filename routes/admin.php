@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 use function Ramsey\Uuid\v1;
 
@@ -150,5 +152,58 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return back()->with('message', 'Verification link sent!');
     })->middleware(['auth:admin', 'throttle:6,1'])->name('verification.send');
 
+
+
+    // Reset Password-------------------------------------//
+
+    Route::get('/forgot-password', function () {
+        return view('admin.forgot-password');
+    })->middleware('guest:admin')->name('password.request');
+
+
+    Route::post('/forgot-password', function (Request $request) {
+        $request->validate(['email' => 'required|email|exists:admins,email']);
+    
+        $status = Password::broker('admins')->sendResetLink( // Cusotm Password reset er somoy Broker ta bole dite hobe.
+            $request->only('email')
+        );
+    
+        return $status === Password::RESET_LINK_SENT
+                    ? back()->with(['status' => __($status)])
+                    : back()->withErrors(['email' => __($status)]);
+    })->middleware('guest:admin')->name('password.email');
+
+
+    Route::get('/reset-password/{token}', function ($token) {
+        return view('admin.reset-password', ['token' => $token]);
+    })->middleware('guest:admin')->name('password.reset');
+
+
+    Route::post('/reset-password', function (Request $request) {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+    
+        $status = Password::broker('admins')->reset( // Cusotm Password reset er somoy Broker ta bole dite hobe.
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    // 'password' => Hash::make($password)
+                    'password' => $password
+                ])->setRememberToken(Str::random(60));
+    
+                $user->save();
+
+                // Password Reset howar por user ke mail korte chaile.
+                // event(new PasswordReset($user));
+            }
+        );
+    
+        return $status === Password::PASSWORD_RESET
+                    ? redirect()->route('admin.login')->with('status', __($status))
+                    : back()->withErrors(['email' => [__($status)]]);
+    })->middleware('guest:admin')->name('password.update');
     
 });

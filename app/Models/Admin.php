@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\AdminEmailVerifyNotification;
+use App\Notifications\AdminResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,6 +57,18 @@ class Admin extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new AdminEmailVerifyNotification);
+    }
+
+
+    // By defaile ai "sendPasswordResetNotification($token)" notificatin ta Web Grard er jonno kaj kore.
+    // But jdoi custom Password reset korte chai ta hole ai Notificatin ta ke Over Right korte hobe.
+    // Ata ke model e define kore, Custom akta Notificaion make korte hobe.
+    // And seta ke ekhane call kore dite hobe.
+    // Same Process Email Verificatin er jonno.
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPasswordNotification($token));
     }
 
 
