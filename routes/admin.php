@@ -1,9 +1,11 @@
 <?php
 
+use App\Events\AdminRegisterEvent;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use function Ramsey\Uuid\v1;
 
@@ -48,10 +50,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         if($password === $con_password){
             $admin = Admin::create($request->only('name', 'email', 'password'));
 
+            // Custom Event use kore Email Varification kortechi 
+            event(new AdminRegisterEvent($admin));
+
             $request->session()->regenerate();
             Auth::guard('admin')->login($admin);
             return redirect()->intended('admin/dashboard');
-
+ 
         }else{
             return back()->withErrors([
                 'con_password' => 'Password Miss Match',
@@ -102,7 +107,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
         $request->validate([
-            'email' => ['required', 'exists:users,email'],
+            'email' => ['required', 'exists:admins,email'],
             'password' => ['required']
         ]);
 
@@ -121,6 +126,29 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Dashboard-------//
     Route::get('/dashboard', function () {
        return view('admin.dashboard'); 
-    })->name('dashboard')->middleware('auth:admin');
+    })->name('dashboard')->middleware(['auth:admin', 'custom_verify']);
 
+
+    // Email Verification---------//
+
+    Route::get('/email/verify', function () {
+        return view('admin.verify-email');
+    })->middleware('auth:admin')->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+    
+        return redirect('admin/dashboard');
+    })->middleware(['auth:admin', 'signed'])->name('verification.verify');
+
+
+    // Resending The Verification Email-------------//
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+    
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth:admin', 'throttle:6,1'])->name('verification.send');
+
+    
 });

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Notifications\AdminEmailVerifyNotification;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -48,6 +50,12 @@ class Admin extends Authenticatable
     {
         // $value = 'password';
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    // Custom Notification 
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new AdminEmailVerifyNotification);
     }
 
 
