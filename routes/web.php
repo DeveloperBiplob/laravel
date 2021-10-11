@@ -659,3 +659,19 @@ Route::get('/scope', function () {
                     ? redirect()->route('login')->with('status', __($status))
                     : back()->withErrors(['email' => [__($status)]]);
     })->middleware('guest:web')->name('password.update');
+
+
+
+    // Authorization with Gate ------------------//
+    // Route e use korte hole middleware er moto kore use korte hobe. middleware('can:isAdmin');
+    // jodi user er role admin hoy ta hole take access korte dite, na hole 404 error show korabe.
+
+    // Ai shob gulo conditon match koreche Provider e define kore logic er upor base kore,
+        // Gate::define('isAdmin', function($user){
+        //     return $user->role === 'admin';
+        // });
+    // R provider condition match kore data base er role er upor base kore.
+
+    Route::get('admin-can-access', function () {
+        return 'Admin can access this Route';
+    })->middleware('can:isAdmin');

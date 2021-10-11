@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'image'];
+    protected $fillable = ['name', 'user_id', 'slug', 'image'];
     // protected $guarded = [];
 
     // Defining A Mutator

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -34,6 +36,32 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        // Gate Emplyment
+        // Jodi conditionn ta match kore ta hole inche jabe, na hole 404 eror show krbe.
+        // Mane holo jodi User e role admin hoy ta hole ta Create page e jete dibe, na hole 404 errow show korabe.
+
+        // Ai shob gulo conditon match koreche Provider e define kore logic er upor base kore,
+            // Gate::define('isAdmin', function($user){
+            //     return $user->role === 'admin';
+            // });
+        // R provider condition match kore data base er role er upor base 
+
+        // Gate::allows('isAdmin') ? Response::allow() : abort(404);
+
+        #Or
+        // if(Gate::allows('isAdmin')){
+        //     dd('Only Admin can access this page');
+        // }else{
+        //     dd('You are not Admin');
+        // }
+
+        #Or
+        // if(Gate::denies('isAdmin')){
+        //     dd('You are not Admin');
+        // }else{
+        //     dd('Admin allowed');
+        // }
+
         return view()->exists('category.create') ? view('category.create') : abort(404);
     }
 
@@ -97,6 +125,11 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        // Gate prevent
+        // Ai condition ta provider e define kore diche. 'update-post' nam e
+        // condition match na korle update-categoy page e access korte dibe na.
+        Gate::allows('update-category', $category) ? Response::allow() : abort(404);
+
         return view()->exists('category.edit') ? view('category.edit', compact('category')) : abort(404);
     }
 

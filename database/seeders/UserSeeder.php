@@ -15,13 +15,35 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i <=10; $i++){
-            User::create([
-                'name'=> Str::random(5),
-                'email' => "biplob{$i}@gmail.com",
-                'password'=> bcrypt('password')
+        // for($i = 1; $i <=10; $i++){
+        //     User::create([
+        //         'name'=> Str::random(5),
+        //         'email' => "biplob{$i}@gmail.com",
+        //         'password'=> bcrypt('password')
     
-            ]);
-        }
+        //     ]);
+        // }
+        
+        User::create([
+            'name' => 'Admin',
+            'email' => "admin@gmail.com",
+            'password'=> 'password',
+            'role' => 'admin',
+            'email_verified_at' => now()
+        ]);
+        User::create([
+            'name' => 'Editor',
+            'email' => "editor@gmail.com",
+            'password'=> 'password',
+            'role' => 'editor',
+            'email_verified_at' => now()
+        ]);
+        User::create([
+            'name' => 'Moderator',
+            'email' => "moderator@gmail.com",
+            'password'=> 'password',
+            'role' => 'moderator',
+            'email_verified_at' => now()
+        ]);
     }
 }

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         // Seeder call--------//
         $this->call([
             UserSeeder::class,
+            CategorySeeder::class,
             // ProfileSeeder::class,
             // PostSeeder::class
         ]);
