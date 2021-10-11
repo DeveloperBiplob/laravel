@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserSkillController;
 use App\Models\Country;
 use App\Models\Machanic;
 use App\Models\Post;
@@ -675,3 +676,8 @@ Route::get('/scope', function () {
     Route::get('admin-can-access', function () {
         return 'Admin can access this Route';
     })->middleware('can:isAdmin');
+
+
+
+    // Authorization with Policy ------------------//
+    Route::resource('skill', UserSkillController::class);
