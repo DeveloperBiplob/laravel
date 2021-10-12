@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\User;
+use App\Models\UserSkill;
+use App\Policies\SkillPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,6 +18,69 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+
+        // Create policy
+        // php artisan make:policy PostPolicy --model=Post
+
+        // Protome AuthServiceProvider e Policy ta ke Registter kore nite hobe.
+        // key valu wise register korbo, protome Model er name, tar por Policy er name. 
+        // jei model er sathe policy take use korte chaschi oi model er name. akta model er joono akta policy use korbo.
+        // Ploicy ke view file and Controller / Middleware e prevent korbo.
+
+        // Register policy
+        UserSkill::class => SkillPolicy::class,
+
+
+        // Via Controller------//
+        // $this->authorize('update', $skill);
+
+
+
+        // Use in Middleware------//
+        // Route::put('/post/{post}', function (Post $post) {
+        //     // The current user may update the post...
+        // })->middleware('can:update,post');
+
+
+        // Via Blade Templates-----//
+        // @can('update', $post)
+        //     <!-- The current user can update the post... -->
+        // @elsecan('create', App\Models\Post::class)
+        //     <!-- The current user can create new posts... -->
+        // @else
+        //     <!-- ... -->
+        // @endcan
+
+        // @cannot('update', $post)
+        //     <!-- The current user cannot update the post... -->
+        // @elsecannot('create', App\Models\Post::class)
+        //     <!-- The current user cannot create new posts... -->
+        // @endcannot
+
+
+        // @if (Auth::user()->can('update', $post))
+        //     <!-- The current user can update the post... -->
+        // @endif
+
+        // @unless (Auth::user()->can('update', $post))
+        //     <!-- The current user cannot update the post... -->
+        // @endunless
+
+
+        // @canany(['update', 'view', 'delete'], $post)
+        //     <!-- The current user can update, view, or delete the post... -->
+        // @elsecanany(['create'], \App\Models\Post::class)
+        //     <!-- The current user can create a post... -->
+        // @endcanany
+
+        // @can('create', App\Models\Post::class)
+        //     <!-- The current user can create posts... -->
+        // @endcan
+
+        // @cannot('create', App\Models\Post::class)
+        //     <!-- The current user can't create posts... -->
+        // @endcannot
+
     ];
 
     /**

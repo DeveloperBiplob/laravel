@@ -25,8 +25,15 @@
                     <td>{{ $skill->user->name }}</td>
                     <td><img width="150px" src="{{ $skill->image }}" alt=""></td>
                     <td>
+
+                        @can('update', $skill)
                         <a href="{{ route('skill.edit', $skill->slug) }}" class="btn btn-success btn-xs">Edit</a>
+                        @endcan
+
+                        @can('view', $skill)
                         <a href="{{ route('skill.show', $skill->slug) }}" class="btn btn-info btn-xs">Show</a>
+                        @endcan
+
                         <form class="d-inline-block" action="{{ route('skill.destroy', $skill->slug) }}" method="POST">
                             @csrf
                             @method('DELETE')

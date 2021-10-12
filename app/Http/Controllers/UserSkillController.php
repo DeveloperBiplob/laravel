@@ -27,6 +27,10 @@ class UserSkillController extends Controller
      */
     public function create()
     {
+        // Policy prevant in controller
+        // Create method er jonno instance pass korte hoy na. jsut model class ta bole dile e hoy.
+        // Karon e ekane Use er roel e upor base kore condition use korci.
+        $this->authorize('create', UserSkill::class);
         return view()->exists('skill.create') ? view('skill.create') : abort(404);
     }
 
@@ -68,6 +72,10 @@ class UserSkillController extends Controller
      */
     public function show(UserSkill $skill)
     {
+        // Policy prevant in controller
+        // Protome policy Method ta dite hobe tar por Model er instance ta pass kore dite hobe.
+        $this->authorize('view', $skill);
+
         return view()->exists('skill.show') ? view('skill.show', compact('skill')) : abort(404);
     }
 
@@ -79,6 +87,10 @@ class UserSkillController extends Controller
      */
     public function edit(UserSkill $skill)
     {
+        // Policy prevant in controller
+        // Protome policy Method ta dite hobe tar por Model er instance ta pass kore dite hobe.
+        $this->authorize('update', $skill);
+
         return view()->exists('skill.edit') ? view('skill.edit', compact('skill')) : abort(404);
     }
 
